@@ -43,10 +43,8 @@
 .fairy {
   background-color: #ff00c8;
 }
-body {
-  font-family: sans-serif;
-  text-align: center;
-  margin-top: 50px;
+.electric {
+  background-color: #f7df03;
 }
 #tarjeta-pokemon {
   border: 2px solid #060505;
@@ -118,7 +116,7 @@ body {
 
 /* 4. Le damos estilo al texto de altura y peso (el <p>) */
 #tarjeta-pokemon p {
-  color: #7f8c8d; /* Texto gris claro para que no compita con el título */
+  color: #5a5454; /* Texto gris claro para que no compita con el título */
   font-size: 14px;
 }
 /* Centramos el buscador y le damos espacio contra la tarjeta */
@@ -154,4 +152,36 @@ body {
 /* Un toque extra: que el botón cambie un poco al pasar el mouse (Hover) */
 #btn_buscar:hover {
   background-color: #cc0000;
+}
+
+/* Quítale los puntos feos a la lista principal */
+#tarjeta-pokemon ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Dale forma a las barras */
+.barra-fondo {
+  background-color: #e0e0e0; /* Tu fondo gris */
+  border-radius: 15px;
+  margin: 8px 0;
+  height: 25px; /* Altura fija para la pista */
+  position: relative; /* Fundamental para que el texto flote adentro */
+  overflow: hidden; /* Corta el color si se sale de los bordes redondos */
+}
+
+.barra-relleno {
+  background-color: #03e02c; /* Ponle el tono azul/verde/rojo que elegiste */
+  height: 100%;
+  border-radius: 15px;
+}
+
+.texto-stat {
+  position: absolute; /* Saca el texto del flujo normal para ponerlo encima */
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase; /* Detalle pro: hace las letras mayúsculas */
 }

@@ -5,18 +5,23 @@ function obtenerPokemon() {
   let inputPokemon = document.getElementById("input_pokemon");
   let botonBuscar = document.getElementById("btn_buscar");
 
+  inputPokemon.addEventListener("keydown", (evento) => {
+    if (evento.key === "Enter") {
+      pokemonBuscar();
+    }
+  });
   // EXPLICACION: aca el evento lo que hace es obtenr el valor del input y mandar a llamar a la funcion de buscar pokemon
   botonBuscar.addEventListener("click", function () {
+    pokemonBuscar();
+  });
+  function pokemonBuscar() {
     let pokemonObtenido = inputPokemon.value.toLowerCase();
-
-    // EXPLICACION: Esto nos sirve para simular que esta cargando la API
     let contenedor = document.getElementById("tarjeta-pokemon");
     contenedor.innerHTML = "espera a que cargue el dato";
-    // EXPLICACION: Esto lo hago para que muestre un un mensaje de espera, siento que seria mejor si agregamos un SetTimeout
     setTimeout(() => {
       buscarPokemon(pokemonObtenido);
     }, 1000);
-  });
+  }
 }
 async function buscarPokemon(pokemonSeleccionado) {
   // EXPLICACION: En este lo que se hace es tratar de conseguir la API y los datos, si todo sale bien mandar a llamar a la funcion para aplicar Cambios
@@ -43,19 +48,39 @@ async function buscarPokemon(pokemonSeleccionado) {
   }
 }
 function insertarDatosDom(datosPokemon) {
-  let contenedor = document.getElementById("tarjeta-pokemon");
-  contenedor.innerHTML = "";
+  let contenedorPokemon = document.getElementById("tarjeta-pokemon");
+  contenedorPokemon.innerHTML = "";
 
   // EXPLICACION: Esto es para crear los elementos los cuales se van a organizar el DIV
   let nombrePokemon = document.createElement("h2");
   let imagenPokemon = document.createElement("img");
   let alturaPesoPokemon = document.createElement("p");
   let tiposPokemon = document.createElement("ul");
+  let estadisticasPokemon = document.createElement("ul");
 
   // EXPLICACION: aca asiganmos todos esos datos
   nombrePokemon.textContent = datosPokemon.name;
   imagenPokemon.src = datosPokemon.sprites.front_shiny;
   alturaPesoPokemon.textContent = `Altura de ${datosPokemon.height}m y su peso de ${datosPokemon.weight}`;
+
+  datosPokemon.stats.forEach(function (estadisticasPok) {
+    let contenedorStat = document.createElement("li");
+    contenedorStat.classList.add("barra-fondo");
+
+    let rellenoStat = document.createElement("div");
+    rellenoStat.classList.add("barra-relleno");
+    let maximaEstadistica = (estadisticasPok.base_stat * 100) / 255;
+    rellenoStat.style.width = `${maximaEstadistica}%`;
+
+    let textoStat = document.createElement("span");
+    textoStat.textContent = `${estadisticasPok.stat.name} ${estadisticasPok.base_stat}`;
+    textoStat.classList.add("texto-stat");
+
+    contenedorStat.appendChild(textoStat);
+    contenedorStat.appendChild(rellenoStat);
+
+    estadisticasPokemon.appendChild(contenedorStat);
+  });
 
   datosPokemon.types.forEach(function (elementoTipo) {
     let listaTipos = document.createElement("li");
@@ -65,14 +90,14 @@ function insertarDatosDom(datosPokemon) {
   });
 
   // EXPLICACION: Aca ya agreagmaos todo al documento principal osea el DIV
-  contenedor.appendChild(nombrePokemon);
-  contenedor.appendChild(imagenPokemon);
-  contenedor.appendChild(alturaPesoPokemon);
-  contenedor.appendChild(tiposPokemon);
+  contenedorPokemon.appendChild(nombrePokemon);
+  contenedorPokemon.appendChild(imagenPokemon);
+  contenedorPokemon.appendChild(alturaPesoPokemon);
+  contenedorPokemon.appendChild(tiposPokemon);
+  contenedorPokemon.appendChild(estadisticasPokemon);
 
   // EXPLICACION: Bloque para inserccion de clases mediante DOM
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
 }
-
 obtenerPokemon();
