@@ -185,3 +185,22 @@ body {
   color: #333;
   text-transform: uppercase; /* Detalle pro: hace las letras mayúsculas */
 }
+
+.attack .barra-relleno {
+  background-color: #e32d2dc9;
+}
+.defense .barra-relleno {
+  background-color: #0209c285;
+}
+.hp .barra-relleno {
+  background-color: #62ff007a;
+}
+.special-attack .barra-relleno {
+  background-color: #ff000058;
+}
+.special-defense .barra-relleno {
+  background-color: #05ecfd50;
+}
+.speed .barra-relleno {
+  background-color: #fff20085;
+}

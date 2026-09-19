@@ -19,10 +19,12 @@ function obtenerPokemon() {
     let contenedor = document.getElementById("tarjeta-pokemon");
     contenedor.innerHTML = "espera a que cargue el dato";
     setTimeout(() => {
+      inputPokemon.value = "";
       buscarPokemon(pokemonObtenido);
     }, 1000);
   }
 }
+
 async function buscarPokemon(pokemonSeleccionado) {
   // EXPLICACION: En este lo que se hace es tratar de conseguir la API y los datos, si todo sale bien mandar a llamar a la funcion para aplicar Cambios
   try {
@@ -41,12 +43,16 @@ async function buscarPokemon(pokemonSeleccionado) {
     // EXPLICACION: Por si algo falla saber que fallo
   } catch (error) {
     let contenedor = document.getElementById("tarjeta-pokemon");
-    let mensajeError = document.createElement("h1");
+    let mensajeError = document.createElement("p");
+    let pokemonNoEncontrado = document.createElement("img");
+    pokemonNoEncontrado.src = "https://i.redd.it/q37r8riip3271.jpg";
     contenedor.innerHTML = "";
     mensajeError.textContent = error;
+    contenedor.appendChild(pokemonNoEncontrado);
     contenedor.appendChild(mensajeError);
   }
 }
+
 function insertarDatosDom(datosPokemon) {
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
@@ -66,6 +72,7 @@ function insertarDatosDom(datosPokemon) {
   datosPokemon.stats.forEach(function (estadisticasPok) {
     let contenedorStat = document.createElement("li");
     contenedorStat.classList.add("barra-fondo");
+    contenedorStat.classList.add(estadisticasPok.stat.name);
 
     let rellenoStat = document.createElement("div");
     rellenoStat.classList.add("barra-relleno");
@@ -100,4 +107,6 @@ function insertarDatosDom(datosPokemon) {
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
 }
-obtenerPokemon();
+
+buscarPokemon("gengar");
+//obtenerPokemon();
