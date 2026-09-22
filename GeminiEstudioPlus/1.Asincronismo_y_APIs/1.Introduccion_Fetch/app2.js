@@ -37,6 +37,7 @@ async function buscarPokemon(pokemonSeleccionado) {
     }
 
     let datosPokemon = await respuesta.json();
+    datosPokemon = limpiarJson(datosPokemon);
 
     insertarDatosDom(datosPokemon);
 
@@ -53,6 +54,18 @@ async function buscarPokemon(pokemonSeleccionado) {
   }
 }
 
+function limpiarJson(json) {
+  let pokemonLimpio = {
+    name: json.name,
+    imagen: json.sprites.front_shiny,
+    altura: json.height,
+    peso: json.weight,
+    estadisticas: json.stats,
+    tipos: json.types,
+  };
+  return pokemonLimpio;
+}
+
 function insertarDatosDom(datosPokemon) {
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
@@ -66,10 +79,10 @@ function insertarDatosDom(datosPokemon) {
 
   // EXPLICACION: aca asiganmos todos esos datos
   nombrePokemon.textContent = datosPokemon.name;
-  imagenPokemon.src = datosPokemon.sprites.front_shiny;
-  alturaPesoPokemon.textContent = `Altura de ${datosPokemon.height}m y su peso de ${datosPokemon.weight}`;
+  imagenPokemon.src = datosPokemon.imagen;
+  alturaPesoPokemon.textContent = `Altura de ${datosPokemon.altura}m y su peso de ${datosPokemon.peso}`;
 
-  datosPokemon.stats.forEach(function (estadisticasPok) {
+  datosPokemon.estadisticas.forEach(function (estadisticasPok) {
     let contenedorStat = document.createElement("li");
     contenedorStat.classList.add("barra-fondo");
     contenedorStat.classList.add(estadisticasPok.stat.name);
@@ -89,7 +102,7 @@ function insertarDatosDom(datosPokemon) {
     estadisticasPokemon.appendChild(contenedorStat);
   });
 
-  datosPokemon.types.forEach(function (elementoTipo) {
+  datosPokemon.tipos.forEach(function (elementoTipo) {
     let listaTipos = document.createElement("li");
     listaTipos.textContent = elementoTipo.type.name;
     listaTipos.classList.add(elementoTipo.type.name);
@@ -108,5 +121,4 @@ function insertarDatosDom(datosPokemon) {
   tiposPokemon.classList.add("pokemon-tipos");
 }
 
-buscarPokemon("gengar");
-//obtenerPokemon();
+obtenerPokemon();
