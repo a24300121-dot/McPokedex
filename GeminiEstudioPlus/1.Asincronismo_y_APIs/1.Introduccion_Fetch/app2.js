@@ -1,7 +1,7 @@
 // NOTA: este codigo pretende que apartir de algo ingresado por el usuario se extraigan los datos del pokemon requerido
 
+// EXPLICACION: En esta funcion se obtiene el pokemon y se hacen los eventos
 function obtenerPokemon() {
-  // EXPLICACION: En esta parte se consigue el input y el boton para agregar un evento y asi
   let inputPokemon = document.getElementById("input_pokemon");
   let botonBuscar = document.getElementById("btn_buscar");
 
@@ -10,11 +10,11 @@ function obtenerPokemon() {
       pokemonBuscar();
     }
   });
-  // EXPLICACION: aca el evento lo que hace es obtenr el valor del input y mandar a llamar a la funcion de buscar pokemon
   botonBuscar.addEventListener("click", function () {
     pokemonBuscar();
   });
   function pokemonBuscar() {
+    // FALLA: lo ideal seria poner este "setTimeout" despues y no ahorita por que seria x + 1 en vez de que ese segundo sea tanqueando en lo que se busca
     let pokemonObtenido = inputPokemon.value.toLowerCase();
     let contenedor = document.getElementById("tarjeta-pokemon");
     contenedor.innerHTML = "espera a que cargue el dato";
@@ -25,23 +25,18 @@ function obtenerPokemon() {
   }
 }
 
+// EXPLICACION: Esta funcion es la encargada de de buscar el pokemon en la API, tambien es la encargada de los errores que puede tener la misma
 async function buscarPokemon(pokemonSeleccionado) {
-  // EXPLICACION: En este lo que se hace es tratar de conseguir la API y los datos, si todo sale bien mandar a llamar a la funcion para aplicar Cambios
   try {
     let pokemonApi = `https://pokeapi.co/api/v2/pokemon/${pokemonSeleccionado}`;
     let respuesta = await fetch(pokemonApi);
-
-    // EXPLICACION: Esto es por si la pagina esta caida que de el error
     if (!respuesta.ok) {
       throw new Error("pokemon no encontrado");
     }
 
     let datosPokemon = await respuesta.json();
     datosPokemon = limpiarJson(datosPokemon);
-
     insertarDatosDom(datosPokemon);
-
-    // EXPLICACION: Por si algo falla saber que fallo
   } catch (error) {
     let contenedor = document.getElementById("tarjeta-pokemon");
     let mensajeError = document.createElement("p");
@@ -54,10 +49,11 @@ async function buscarPokemon(pokemonSeleccionado) {
   }
 }
 
+// EXPLICACION: En este limpiamos los datos del pokemon que nos manda la API para que solo jalemos lo que ocupemos
 function limpiarJson(json) {
   let pokemonLimpio = {
     name: json.name,
-    imagen: json.sprites.front_shiny,
+    imagen: json.sprites.front_default,
     altura: json.height,
     peso: json.weight,
     estadisticas: json.stats,
@@ -66,18 +62,17 @@ function limpiarJson(json) {
   return pokemonLimpio;
 }
 
+// EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 function insertarDatosDom(datosPokemon) {
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
 
-  // EXPLICACION: Esto es para crear los elementos los cuales se van a organizar el DIV
   let nombrePokemon = document.createElement("h2");
   let imagenPokemon = document.createElement("img");
   let alturaPesoPokemon = document.createElement("p");
   let tiposPokemon = document.createElement("ul");
   let estadisticasPokemon = document.createElement("ul");
 
-  // EXPLICACION: aca asiganmos todos esos datos
   nombrePokemon.textContent = datosPokemon.name;
   imagenPokemon.src = datosPokemon.imagen;
   alturaPesoPokemon.textContent = `Altura de ${datosPokemon.altura}m y su peso de ${datosPokemon.peso}`;
@@ -109,16 +104,16 @@ function insertarDatosDom(datosPokemon) {
     tiposPokemon.appendChild(listaTipos);
   });
 
-  // EXPLICACION: Aca ya agreagmaos todo al documento principal osea el DIV
   contenedorPokemon.appendChild(nombrePokemon);
   contenedorPokemon.appendChild(imagenPokemon);
   contenedorPokemon.appendChild(alturaPesoPokemon);
   contenedorPokemon.appendChild(tiposPokemon);
   contenedorPokemon.appendChild(estadisticasPokemon);
 
-  // EXPLICACION: Bloque para inserccion de clases mediante DOM
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
 }
 
 obtenerPokemon();
+
+//buscarPokemon("onix");
