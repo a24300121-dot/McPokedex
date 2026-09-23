@@ -31,21 +31,32 @@ async function buscarPokemon(pokemonSeleccionado) {
     let pokemonApi = `https://pokeapi.co/api/v2/pokemon/${pokemonSeleccionado}`;
     let respuesta = await fetch(pokemonApi);
     if (!respuesta.ok) {
-      throw new Error("pokemon no encontrado");
+      throw new Error(404);
     }
 
     let datosPokemon = await respuesta.json();
     datosPokemon = limpiarJson(datosPokemon);
+
     insertarDatosDom(datosPokemon);
   } catch (error) {
     let contenedor = document.getElementById("tarjeta-pokemon");
     let mensajeError = document.createElement("p");
     let pokemonNoEncontrado = document.createElement("img");
-    pokemonNoEncontrado.src = "https://i.redd.it/q37r8riip3271.jpg";
-    contenedor.innerHTML = "";
-    mensajeError.textContent = error;
-    contenedor.appendChild(pokemonNoEncontrado);
-    contenedor.appendChild(mensajeError);
+
+    if (error.message === "404") {
+      pokemonNoEncontrado.src = "https://i.redd.it/q37r8riip3271.jpg";
+      contenedor.innerHTML = "";
+      mensajeError.textContent = "Pokemon no encontrado :(";
+      contenedor.appendChild(pokemonNoEncontrado);
+      contenedor.appendChild(mensajeError);
+    } else {
+      pokemonNoEncontrado.src = "./Imagenes/QuagsireMorbido.png";
+      contenedor.innerHTML = "";
+      mensajeError.textContent =
+        "no hubo conexicion exitosa, pinche quagsire todo morbido";
+      contenedor.appendChild(pokemonNoEncontrado);
+      contenedor.appendChild(mensajeError);
+    }
   }
 }
 
@@ -112,8 +123,31 @@ function insertarDatosDom(datosPokemon) {
 
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
+
+  //esto es para simplemente poder llamar a la funcion de memoria
+  let botonGuardado = document.getElementById("btn_guardar");
+
+  botonGuardado.onclick = () => {
+    crearMemoria(datosPokemon);
+    console.log("salio bien?");
+  };
 }
 
-obtenerPokemon();
+function crearMemoria(objetoPokemon) {
+  let pokemonEmpaquetado = JSON.stringify(objetoPokemon);
+  localStorage.setItem("ultimoPokemon", pokemonEmpaquetado);
+}
 
-//buscarPokemon("onix");
+function revisarMemoria() {
+  let pokemonEnMemoria = localStorage.getItem("ultimoPokemon");
+  let objetoPokemon = JSON.parse(pokemonEnMemoria);
+  if (objetoPokemon != null) {
+    insertarDatosDom(objetoPokemon);
+  } else {
+    console.log("no hay pokemon en memoria");
+  }
+  obtenerPokemon();
+}
+revisarMemoria();
+
+//buscarPokemon("quagsire");
