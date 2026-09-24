@@ -1,0 +1,219 @@
+.ghost {
+  background-color: #63016c60;
+}
+.poison {
+  background-color: #8f009cb6;
+}
+.water {
+  background-color: #058dfd;
+}
+.ground {
+  background-color: #723802;
+}
+.bug {
+  background-color: #96fd05;
+}
+.grass {
+  background-color: #05fd0982;
+}
+.fire {
+  background-color: #fd0505e4;
+}
+.flying {
+  background-color: #7fbbeb;
+}
+.normal {
+  background-color: #bbbbbb;
+}
+.psychic {
+  background-color: #fd0570;
+}
+.steel {
+  background-color: #5f5f5f;
+}
+.dark {
+  background-color: #000000;
+}
+.dragon {
+  background-color: #0d05fd;
+}
+.fighting {
+  background-color: #b00101dc;
+}
+.fairy {
+  background-color: #ff00c8;
+}
+.electric {
+  background-color: #f7df03;
+}
+.rock {
+  background-color: #6d26029a;
+}
+#tarjeta-pokemon {
+  border: 2px solid #060505;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+img {
+  width: 150px;
+}
+/* Esto le dará estilo a la imagen a la que le pongas la clase "pokemon-img" */
+.pokemon-img {
+  width: 150px;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3)); /* Sombrita elegante */
+  background-color: #69c4cb; /* Un fondo grisecito circular */
+  border-radius: 50%;
+  margin: 15px 0;
+}
+
+/* Esto acomodará la lista de tipos en fila en lugar de uno abajo del otro */
+.pokemon-tipos {
+  list-style-type: none; /* Quita las viñetas feas por defecto */
+  padding: 0;
+  display: flex; /* Esto es magia de Flexbox para alinear elementos */
+  justify-content: center; /* Los centra horizontalmente */
+  gap: 10px; /* Le da espacio entre cada tipo */
+}
+
+/* Y esto le da diseño a cada tipo individual (los <li> adentro de tu ul) */
+.pokemon-tipos li {
+  color: #faf7f7;
+  padding: 5px 15px;
+  border-radius: 20px; /* Bordes redondeados tipo píldora */
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: capitalize; /* Pone la primera letra en mayúscula automáticamente */
+}
+/* 1. Preparamos el fondo de la pantalla para que la tarjeta resalte */
+body {
+  background-color: #7fb2e4; /* Un gris azulado muy limpio */
+  font-family: Arial, sans-serif; /* Cambiamos el tipo de letra */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo en la pantalla */
+  padding-top: 50px;
+}
+
+/* 2. Convertimos el DIV transparente en una tarjeta física */
+#tarjeta-pokemon {
+  background-color: white;
+  width: 300px; /* Ancho fijo para que no se estire feo */
+  min-height: 400px; /* Altura mínima */
+  padding: 30px;
+  border-radius: 20px; /* Esquinas bien redondeadas */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15); /* Esta sombra le da el efecto 3D */
+  text-align: center; /* Centramos el texto, la imagen y todo lo que esté adentro */
+  border-top: 15px solid #ff3333; /* Una franja roja arriba estilo Pokédex */
+}
+
+/* 3. Le damos estilo al nombre del Pokémon (el <h2> que creas en JS) */
+#tarjeta-pokemon h2 {
+  text-transform: capitalize; /* Obliga a que la primera letra sea mayúscula */
+  font-size: 28px;
+  color: #2c3e50; /* Un gris muy oscuro, más elegante que el negro puro */
+  margin-bottom: 5px;
+}
+
+/* 4. Le damos estilo al texto de altura y peso (el <p>) */
+#tarjeta-pokemon p {
+  color: #5a5454; /* Texto gris claro para que no compita con el título */
+  font-size: 14px;
+}
+/* Centramos el buscador y le damos espacio contra la tarjeta */
+.contenedor-buscador {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espacio entre el input y el botón */
+  margin-bottom: 20px; /* Separación con la línea roja de la tarjeta */
+}
+
+/* Modernizamos el cuadro de texto */
+#input_pokemon {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 25px; /* Bordes redondeados */
+  outline: none; /* Quita el borde azul feo al darle clic */
+  width: 200px;
+}
+
+/* Le damos estilo al botón para que combine */
+#btn_buscar {
+  background-color: #ff3333; /* Rojo Pokédex */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px; /* Mismos bordes que el input */
+  cursor: pointer; /* Cambia la flecha por una manita */
+  font-weight: bold;
+}
+#btn_guardar {
+  background-color: #45ff02a6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Un toque extra: que el botón cambie un poco al pasar el mouse (Hover) */
+#btn_buscar:hover {
+  background-color: #cc0000;
+}
+
+/* Quítale los puntos feos a la lista principal */
+#tarjeta-pokemon ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Dale forma a las barras */
+.barra-fondo {
+  background-color: #e0e0e0; /* Tu fondo gris */
+  border-radius: 15px;
+  margin: 8px 0;
+  height: 25px; /* Altura fija para la pista */
+  position: relative; /* Fundamental para que el texto flote adentro */
+  overflow: hidden; /* Corta el color si se sale de los bordes redondos */
+}
+
+.barra-relleno {
+  background-color: #03b0e0; /* Ponle el tono azul/verde/rojo que elegiste */
+  height: 100%;
+  border-radius: 15px;
+}
+
+.texto-stat {
+  position: absolute; /* Saca el texto del flujo normal para ponerlo encima */
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase; /* Detalle pro: hace las letras mayúsculas */
+}
+
+.attack .barra-relleno {
+  background-color: #ff0000c9;
+}
+.defense .barra-relleno {
+  background-color: #00c3ff;
+}
+.hp .barra-relleno {
+  background-color: #66ff07;
+}
+.special-attack .barra-relleno {
+  background-color: #bb0404;
+}
+.special-defense .barra-relleno {
+  background-color: #266fa7;
+}
+.speed .barra-relleno {
+  background-color: #fff20085;
+}
