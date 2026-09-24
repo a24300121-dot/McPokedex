@@ -13,7 +13,11 @@ export function insertarDatosDom(datosPokemon) {
 
   nombrePokemon.textContent = datosPokemon.name;
   imagenPokemon.src = datosPokemon.imagen;
-  alturaPesoPokemon.textContent = `Altura de ${datosPokemon.altura}m y su peso de ${datosPokemon.peso}`;
+
+  let alturaReal = datosPokemon.altura * 0.1;
+  let pesoReal = datosPokemon.peso * 0.1;
+
+  alturaPesoPokemon.textContent = `Altura de ${alturaReal.toFixed(2)}Metros y su peso de ${pesoReal.toFixed(2).Kg}`;
 
   datosPokemon.estadisticas.forEach(function (estadisticasPok) {
     let contenedorStat = document.createElement("li");
