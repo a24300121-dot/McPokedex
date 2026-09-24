@@ -1,4 +1,4 @@
-import { crearMemoria } from "./storage";
+import { crearMemoria } from "./storage.js";
 
 // EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 export function insertarDatosDom(datosPokemon) {
