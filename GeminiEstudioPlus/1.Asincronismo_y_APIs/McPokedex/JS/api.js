@@ -38,7 +38,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
 export function limpiarJson(json) {
   let pokemonLimpio = {
     name: json.name,
-    imagen: json.sprites.front_default,
+    imagen: json.sprites,
     altura: json.height,
     peso: json.weight,
     estadisticas: json.stats,

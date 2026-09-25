@@ -10,9 +10,11 @@ export function insertarDatosDom(datosPokemon) {
   let alturaPesoPokemon = document.createElement("p");
   let tiposPokemon = document.createElement("ul");
   let estadisticasPokemon = document.createElement("ul");
+  let botonCambioShiny = document.createElement("button");
 
   nombrePokemon.textContent = datosPokemon.name;
-  imagenPokemon.src = datosPokemon.imagen;
+  imagenPokemon.src = datosPokemon.imagen.front_default;
+  botonCambioShiny.textContent = "Version shiny";
 
   let alturaReal = datosPokemon.altura * 0.1;
   let pesoReal = datosPokemon.peso * 0.1;
@@ -48,6 +50,7 @@ export function insertarDatosDom(datosPokemon) {
 
   contenedorPokemon.appendChild(nombrePokemon);
   contenedorPokemon.appendChild(imagenPokemon);
+  contenedorPokemon.appendChild(botonCambioShiny);
   contenedorPokemon.appendChild(alturaPesoPokemon);
   contenedorPokemon.appendChild(tiposPokemon);
   contenedorPokemon.appendChild(estadisticasPokemon);
@@ -55,6 +58,16 @@ export function insertarDatosDom(datosPokemon) {
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
 
+  botonCambioShiny.onclick = () => {
+    if (imagenPokemon.src === datosPokemon.imagen.front_default) {
+      imagenPokemon.src = datosPokemon.imagen.front_shiny;
+      botonCambioShiny.textContent = "Version normal";
+    } else {
+      imagenPokemon.src = datosPokemon.imagen.front_default;
+      botonCambioShiny.textContent = "Version shiny";
+    }
+  };
+  botonCambioShiny.classList.add("btn-cambioshiny");
   //esto es para simplemente poder llamar a la funcion de memoria
   let botonGuardado = document.getElementById("btn_guardar");
 

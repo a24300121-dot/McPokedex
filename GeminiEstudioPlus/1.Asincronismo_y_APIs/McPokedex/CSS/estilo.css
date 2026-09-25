@@ -58,14 +58,14 @@
   background-color: #ffffff;
 }
 img {
-  width: 150px;
+  width: 100px;
 }
 /* Esto le dará estilo a la imagen a la que le pongas la clase "pokemon-img" */
 .pokemon-img {
-  width: 150px;
+  width: 200px;
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3)); /* Sombrita elegante */
   background-color: #69c4cb; /* Un fondo grisecito circular */
-  border-radius: 50%;
+  border-radius: 40%;
   margin: 15px 0;
 }
 
@@ -86,6 +86,16 @@ img {
   font-weight: bold;
   font-size: 14px;
   text-transform: capitalize; /* Pone la primera letra en mayúscula automáticamente */
+}
+.btn-cambioshiny {
+  background-color: #c507ff; /* Rojo Pokédex */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px; /* Mismos bordes que el input */
+  cursor: pointer; /* Cambia la flecha por una manita */
+  font-weight: bold;
 }
 /* 1. Preparamos el fondo de la pantalla para que la tarjeta resalte */
 body {
