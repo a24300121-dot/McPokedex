@@ -8,7 +8,7 @@ export function crearMemoria(objetoPokemon) {
     if (listaMemoria.length <= 5) {
       listaMemoria.push(objetoPokemon);
     } else {
-      listaMemoria.push(objetoPokemon);
+      listaMemoria.push();
       listaMemoria.shift();
     }
   }
@@ -26,13 +26,4 @@ export function obtenerHistorial() {
   }
 }
 
-function revisarPokemons(listaMemoria, objetoPokemon) {
-  let estaRepetido = listaMemoria.some(
-    (pokemon) => listaMemoria.name === objetoPokemon.name,
-  );
-  if (estaRepetido) {
-    console.log("No esta repetido");
-  } else {
-    console.log("Esta repetido");
-  }
-}
+//nota falta mejorar el deste para los pokemons

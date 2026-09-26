@@ -80,6 +80,7 @@ export function insertarDatosDom(datosPokemon) {
 export function dibujarHistorial(historialPokemons) {
   let contenedor = document.getElementById("tarjeta-pokemon");
   let listaHistorial = document.createElement("ul");
+  listaHistorial.id = "lista-historial-inicio";
   let mensaje = document.createElement("p");
 
   contenedor.innerHTML = "";

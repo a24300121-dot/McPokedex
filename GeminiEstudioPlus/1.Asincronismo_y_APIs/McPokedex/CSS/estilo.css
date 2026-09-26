@@ -229,7 +229,7 @@ body {
 }
 
 /* Contenedor principal del historial (el <ul>) */
-#tarjeta-pokemon ul {
+#lista-historial-inicio {
   display: flex;
   flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
   justify-content: center; /* Centra las tarjetas horizontalmente */
