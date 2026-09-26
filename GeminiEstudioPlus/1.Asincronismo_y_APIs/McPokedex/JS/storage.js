@@ -5,12 +5,9 @@ export function crearMemoria(objetoPokemon) {
 
   if (pokemonListaMemoria != null) {
     listaMemoria = pokemonListaMemoria;
-    if (listaMemoria.length <= 5) {
-      listaMemoria.push(objetoPokemon);
-    } else {
-      listaMemoria.push();
-      listaMemoria.shift();
-    }
+    revisarNombre(listaMemoria, objetoPokemon);
+  } else {
+    revisarNombre(listaMemoria, objetoPokemon);
   }
   let memoriaEmpaquetada = JSON.stringify(listaMemoria);
   localStorage.setItem("ultimoPokemon", memoriaEmpaquetada);
@@ -26,4 +23,18 @@ export function obtenerHistorial() {
   }
 }
 
-//nota falta mejorar el deste para los pokemons
+function revisarNombre(listaMemoria, objetoPokemon) {
+  let estaRepetido = listaMemoria.some(
+    (pokemon) => pokemon.name === objetoPokemon.name,
+  );
+  if (!estaRepetido) {
+    if (listaMemoria.length <= 5) {
+      listaMemoria.push(objetoPokemon);
+    } else {
+      listaMemoria.push(objetoPokemon);
+      listaMemoria.shift();
+    }
+  } else {
+    alert("esta repetido");
+  }
+}
