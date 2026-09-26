@@ -16,7 +16,6 @@ function obtenerPokemon() {
     pokemonBuscar();
   });
   async function pokemonBuscar() {
-    // FALLA: lo ideal seria poner este "setTimeout" despues y no ahorita por que seria x + 1 en vez de que ese segundo sea tanqueando en lo que se busca
     let pokemonObtenido = inputPokemon.value.toLowerCase();
     let contenedor = document.getElementById("tarjeta-pokemon");
 
@@ -29,9 +28,9 @@ function obtenerPokemon() {
   }
 }
 
-let revisarMemoria = Almacenamiento.revisarMemoria();
+let revisarMemoria = Almacenamiento.obtenerHistorial();
 
-if (revisarMemoria !== null) {
-  UI.insertarDatosDom(revisarMemoria);
+if (revisarMemoria.length !== 0) {
+  UI.dibujarHistorial(revisarMemoria);
 }
 obtenerPokemon();

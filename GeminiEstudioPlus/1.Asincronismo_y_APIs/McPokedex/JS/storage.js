@@ -5,21 +5,34 @@ export function crearMemoria(objetoPokemon) {
 
   if (pokemonListaMemoria != null) {
     listaMemoria = pokemonListaMemoria;
+    if (listaMemoria.length <= 5) {
+      listaMemoria.push(objetoPokemon);
+    } else {
+      listaMemoria.push(objetoPokemon);
+      listaMemoria.shift();
+    }
   }
-  console.log(listaMemoria);
-  listaMemoria.push(objetoPokemon);
   let memoriaEmpaquetada = JSON.stringify(listaMemoria);
   localStorage.setItem("ultimoPokemon", memoriaEmpaquetada);
 }
 
-export function revisarMemoria() {
-  let pokemonEnMemoria = localStorage.getItem("ultimoPokemon");
-  let objetoPokemon = JSON.parse(pokemonEnMemoria);
-  if (objetoPokemon != null) {
-    return objetoPokemon.pop();
+export function obtenerHistorial() {
+  let pokemonsMemoria = localStorage.getItem("ultimoPokemon");
+  let listaPokemons = JSON.parse(pokemonsMemoria);
+  if (listaPokemons != null) {
+    return listaPokemons;
   } else {
-    return null;
+    return [];
   }
 }
 
-// EXPLICACION: Aca lo que planeo hacer es que en revisarmemoria se cheque si existe algo, si no creea un arrai, con cada vez que se pulse el boton se concatene algo sumado a una variable, algo asi lo quiero hacer
+function revisarPokemons(listaMemoria, objetoPokemon) {
+  let estaRepetido = listaMemoria.some(
+    (pokemon) => listaMemoria.name === objetoPokemon.name,
+  );
+  if (estaRepetido) {
+    console.log("No esta repetido");
+  } else {
+    console.log("Esta repetido");
+  }
+}

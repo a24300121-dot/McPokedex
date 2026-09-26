@@ -76,3 +76,29 @@ export function insertarDatosDom(datosPokemon) {
     console.log("salio bien?");
   };
 }
+
+export function dibujarHistorial(historialPokemons) {
+  let contenedor = document.getElementById("tarjeta-pokemon");
+  let listaHistorial = document.createElement("ul");
+  let mensaje = document.createElement("p");
+
+  contenedor.innerHTML = "";
+  mensaje.textContent = "pokemons consultados";
+
+  historialPokemons.forEach(function (pokemons) {
+    let pokemonsLista = document.createElement("li");
+    let imagenPokemon = document.createElement("img");
+    let nombrePokemon = document.createElement("p");
+
+    imagenPokemon.src = pokemons.imagen.front_default;
+    nombrePokemon.textContent = pokemons.name;
+    pokemonsLista.classList.add("mini-tarjeta");
+
+    pokemonsLista.appendChild(imagenPokemon);
+    pokemonsLista.appendChild(nombrePokemon);
+
+    listaHistorial.appendChild(pokemonsLista);
+  });
+  contenedor.appendChild(mensaje);
+  contenedor.appendChild(listaHistorial);
+}

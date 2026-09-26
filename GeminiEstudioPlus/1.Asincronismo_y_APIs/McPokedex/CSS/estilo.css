@@ -227,3 +227,51 @@ body {
 .speed .barra-relleno {
   background-color: #fff20085;
 }
+
+/* Contenedor principal del historial (el <ul>) */
+#tarjeta-pokemon ul {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
+  justify-content: center; /* Centra las tarjetas horizontalmente */
+  gap: 15px; /* Espacio de separación entre cada Pokémon */
+  padding: 0;
+  margin: 20px 0;
+  list-style: none; /* Elimina las viñetas negras por defecto de los <li> */
+}
+
+/* Diseño individual de cada Pokémon guardado (el <li>) */
+.mini-tarjeta {
+  background-color: #69c4cb;
+  border: 3px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  width: 100px; /* Tamaño fijo para mantener uniformidad */
+  text-align: center;
+  cursor: pointer; /* Cambia el cursor para indicar que será interactivo */
+  transition:
+    transform 0.2s,
+    border-color 0.2s; /* Animación suave */
+}
+
+/* Efecto visual al pasar el mouse por encima */
+.mini-tarjeta:hover {
+  transform: translateY(-5px); /* Levanta la tarjeta ligeramente */
+  border-color: #ff6600; /* Borde rojo estilo Pokedex */
+}
+
+/* Control del tamaño del sprite */
+.mini-tarjeta img {
+  width: 70px;
+  height: 70px;
+  display: block; /* Evita comportamientos extraños de espacio en imágenes */
+  margin: 0 auto; /* Centra la imagen dentro de la tarjeta */
+}
+
+/* Formato del nombre del Pokémon */
+.mini-tarjeta p {
+  margin: 8px 0 0 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize; /* Fuerza la primera letra a mayúscula */
+}
