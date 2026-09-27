@@ -1,16 +1,19 @@
 export function crearMemoria(objetoPokemon) {
   let listaMemoria = [];
+  let revisarRepetidos = false;
   let checarMemoria = localStorage.getItem("ultimoPokemon");
   let pokemonListaMemoria = JSON.parse(checarMemoria);
 
   if (pokemonListaMemoria != null) {
     listaMemoria = pokemonListaMemoria;
-    revisarNombre(listaMemoria, objetoPokemon);
+    revisarRepetidos = revisarNombre(listaMemoria, objetoPokemon);
   } else {
-    revisarNombre(listaMemoria, objetoPokemon);
+    revisarRepetidos = revisarNombre(listaMemoria, objetoPokemon);
   }
   let memoriaEmpaquetada = JSON.stringify(listaMemoria);
   localStorage.setItem("ultimoPokemon", memoriaEmpaquetada);
+
+  return revisarRepetidos;
 }
 
 export function obtenerHistorial() {
@@ -34,7 +37,8 @@ function revisarNombre(listaMemoria, objetoPokemon) {
       listaMemoria.push(objetoPokemon);
       listaMemoria.shift();
     }
+    return false;
   } else {
-    alert("esta repetido");
+    return true;
   }
 }

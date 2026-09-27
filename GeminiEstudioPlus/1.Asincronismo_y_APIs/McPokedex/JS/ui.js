@@ -1,4 +1,5 @@
 import { crearMemoria } from "./storage.js";
+import { buscarPokemon } from "./api.js";
 
 // EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 export function insertarDatosDom(datosPokemon) {
@@ -72,8 +73,8 @@ export function insertarDatosDom(datosPokemon) {
   let botonGuardado = document.getElementById("btn_guardar");
 
   botonGuardado.onclick = () => {
-    crearMemoria(datosPokemon);
-    console.log("salio bien?");
+    let guardarPokemon = crearMemoria(datosPokemon);
+    alertaPokemonDuplicado(guardarPokemon);
   };
 }
 
@@ -95,6 +96,11 @@ export function dibujarHistorial(historialPokemons) {
     nombrePokemon.textContent = pokemons.name;
     pokemonsLista.classList.add("mini-tarjeta");
 
+    pokemonsLista.onclick = async () => {
+      let pokemonGuardado = await buscarPokemon(pokemons.name);
+      insertarDatosDom(pokemonGuardado);
+    };
+
     pokemonsLista.appendChild(imagenPokemon);
     pokemonsLista.appendChild(nombrePokemon);
 
@@ -102,4 +108,19 @@ export function dibujarHistorial(historialPokemons) {
   });
   contenedor.appendChild(mensaje);
   contenedor.appendChild(listaHistorial);
+}
+
+function alertaPokemonDuplicado(pokemonDuplicado) {
+  if (pokemonDuplicado) {
+    let mensajeDuplicado = document.createElement("div");
+    mensajeDuplicado.textContent = "pokemon ya guardado";
+    mensajeDuplicado.classList.add("toast-error");
+    document.body.appendChild(mensajeDuplicado);
+
+    setTimeout(() => {
+      mensajeDuplicado.remove();
+    }, 3000);
+  } else {
+    console.log("no duplicado");
+  }
 }
