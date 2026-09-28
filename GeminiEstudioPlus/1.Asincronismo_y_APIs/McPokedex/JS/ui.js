@@ -6,6 +6,9 @@ export function insertarDatosDom(datosPokemon) {
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
 
+  let grito = new Audio(datosPokemon.grito);
+  grito.play();
+
   let nombrePokemon = document.createElement("h2");
   let imagenPokemon = document.createElement("img");
   let alturaPesoPokemon = document.createElement("p");
@@ -92,7 +95,7 @@ export function dibujarHistorial(historialPokemons) {
     let imagenPokemon = document.createElement("img");
     let nombrePokemon = document.createElement("p");
 
-    imagenPokemon.src = pokemons.imagen.front_default;
+    imagenPokemon.src = pokemons.imagen;
     nombrePokemon.textContent = pokemons.name;
     pokemonsLista.classList.add("mini-tarjeta");
 

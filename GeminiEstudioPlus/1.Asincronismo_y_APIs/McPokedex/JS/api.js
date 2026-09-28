@@ -37,10 +37,12 @@ export async function buscarPokemon(pokemonSeleccionado) {
 // EXPLICACION: En este limpiamos los datos del pokemon que nos manda la API para que solo jalemos lo que ocupemos
 
 export function limpiarJson(json) {
+  //para un mejor diseño se usar other.home :)
   let pokemonLimpio = {
     name: json.name,
     imagen: json.sprites.front_default,
     imagenShiny: json.sprites.front_shiny,
+    grito: json.cries.latest,
     altura: json.height,
     peso: json.weight,
     estadisticas: json.stats,
