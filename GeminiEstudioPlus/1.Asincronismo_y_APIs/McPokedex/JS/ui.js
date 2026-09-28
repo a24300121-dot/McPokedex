@@ -7,6 +7,7 @@ export function insertarDatosDom(datosPokemon) {
   contenedorPokemon.innerHTML = "";
 
   let grito = new Audio(datosPokemon.grito);
+  grito.volume = 0.3;
   grito.play();
 
   let nombrePokemon = document.createElement("h2");
