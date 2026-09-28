@@ -31,6 +31,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
       contenedor.appendChild(pokemonNoEncontrado);
       contenedor.appendChild(mensajeError);
     }
+    return null;
   }
 }
 // EXPLICACION: En este limpiamos los datos del pokemon que nos manda la API para que solo jalemos lo que ocupemos
@@ -38,7 +39,8 @@ export async function buscarPokemon(pokemonSeleccionado) {
 export function limpiarJson(json) {
   let pokemonLimpio = {
     name: json.name,
-    imagen: json.sprites,
+    imagen: json.sprites.front_default,
+    imagenShiny: json.sprites.front_shiny,
     altura: json.height,
     peso: json.weight,
     estadisticas: json.stats,

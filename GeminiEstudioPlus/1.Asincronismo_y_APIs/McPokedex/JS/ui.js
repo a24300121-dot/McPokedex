@@ -14,7 +14,7 @@ export function insertarDatosDom(datosPokemon) {
   let botonCambioShiny = document.createElement("button");
 
   nombrePokemon.textContent = datosPokemon.name;
-  imagenPokemon.src = datosPokemon.imagen.front_default;
+  imagenPokemon.src = datosPokemon.imagen;
   botonCambioShiny.textContent = "Version shiny";
 
   let alturaReal = datosPokemon.altura * 0.1;
@@ -60,11 +60,11 @@ export function insertarDatosDom(datosPokemon) {
   tiposPokemon.classList.add("pokemon-tipos");
 
   botonCambioShiny.onclick = () => {
-    if (imagenPokemon.src === datosPokemon.imagen.front_default) {
-      imagenPokemon.src = datosPokemon.imagen.front_shiny;
+    if (imagenPokemon.src === datosPokemon.imagen) {
+      imagenPokemon.src = datosPokemon.imagenShiny;
       botonCambioShiny.textContent = "Version normal";
     } else {
-      imagenPokemon.src = datosPokemon.imagen.front_default;
+      imagenPokemon.src = datosPokemon.imagen;
       botonCambioShiny.textContent = "Version shiny";
     }
   };

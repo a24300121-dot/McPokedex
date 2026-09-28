@@ -33,4 +33,5 @@ let revisarMemoria = Almacenamiento.obtenerHistorial();
 if (revisarMemoria.length !== 0) {
   UI.dibujarHistorial(revisarMemoria);
 }
+
 obtenerPokemon();
