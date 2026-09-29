@@ -54,8 +54,9 @@ export function insertarDatosDom(datosPokemon) {
   });
 
   contenedorPokemon.appendChild(nombrePokemon);
-  contenedorPokemon.appendChild(imagenPokemon);
   contenedorPokemon.appendChild(botonCambioShiny);
+  contenedorPokemon.appendChild(imagenPokemon);
+  insertarEvoluciones(datosPokemon);
   contenedorPokemon.appendChild(alturaPesoPokemon);
   contenedorPokemon.appendChild(tiposPokemon);
   contenedorPokemon.appendChild(estadisticasPokemon);
@@ -112,6 +113,51 @@ export function dibujarHistorial(historialPokemons) {
   });
   contenedor.appendChild(mensaje);
   contenedor.appendChild(listaHistorial);
+}
+
+function insertarEvoluciones(datosPokemon) {
+  let listaEvoluciones = document.createElement("ul");
+  let primeraEvolucionCont = document.createElement("li");
+  let segundaEvolucionCont = document.createElement("li");
+  let ultimaEvolucionCont = document.createElement("li");
+  let contenedor = document.getElementById("tarjeta-pokemon");
+
+  listaEvoluciones.classList.add("contenedor-evoluciones");
+  primeraEvolucionCont.classList.add("btn-evolucion");
+  segundaEvolucionCont.classList.add("btn-evolucion");
+  ultimaEvolucionCont.classList.add("btn-evolucion");
+
+  primeraEvolucionCont.textContent = datosPokemon.nombrePrimeraEvo;
+  listaEvoluciones.appendChild(primeraEvolucionCont);
+  primeraEvolucionCont.addEventListener("click", async () => {
+    let buscarPrimeraEvolucion = await buscarPokemon(
+      datosPokemon.nombrePrimeraEvo,
+    );
+    insertarDatosDom(buscarPrimeraEvolucion);
+  });
+
+  if (datosPokemon.nombreSegundaEvo) {
+    segundaEvolucionCont.textContent = datosPokemon.nombreSegundaEvo;
+    listaEvoluciones.appendChild(segundaEvolucionCont);
+    segundaEvolucionCont.addEventListener("click", async () => {
+      let buscarSegundaEvolucion = await buscarPokemon(
+        datosPokemon.nombreSegundaEvo,
+      );
+      insertarDatosDom(buscarSegundaEvolucion);
+    });
+  }
+  if (datosPokemon.nombreTerceraEvo) {
+    ultimaEvolucionCont.textContent = datosPokemon.nombreTerceraEvo;
+    listaEvoluciones.appendChild(ultimaEvolucionCont);
+    ultimaEvolucionCont.addEventListener("click", async () => {
+      let buscarTercerEvolucion = await buscarPokemon(
+        datosPokemon.nombreTerceraEvo,
+      );
+      insertarDatosDom(buscarTercerEvolucion);
+    });
+  }
+
+  contenedor.appendChild(listaEvoluciones);
 }
 
 function alertaPokemonDuplicado(pokemonDuplicado) {

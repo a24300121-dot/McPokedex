@@ -3,13 +3,19 @@
 export async function buscarPokemon(pokemonSeleccionado) {
   try {
     let pokemonApi = `https://pokeapi.co/api/v2/pokemon/${pokemonSeleccionado}`;
-    let respuesta = await fetch(pokemonApi);
-    if (!respuesta.ok) {
+    let respuestaPokemon = await fetch(pokemonApi);
+    if (!respuestaPokemon.ok) {
       throw new Error(404);
     }
+    let datosPokemon = await respuestaPokemon.json();
 
-    let datosPokemon = await respuesta.json();
-    datosPokemon = limpiarJson(datosPokemon);
+    let linkSaberEvoluciones = await fetch(datosPokemon.species.url);
+    let respuestaLink = await linkSaberEvoluciones.json();
+
+    let datosEvolucion = await fetch(respuestaLink.evolution_chain.url);
+    let respuestaDatosEvolucion = await datosEvolucion.json();
+
+    datosPokemon = limpiarJson(datosPokemon, respuestaDatosEvolucion);
 
     return datosPokemon;
   } catch (error) {
@@ -36,7 +42,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
 }
 // EXPLICACION: En este limpiamos los datos del pokemon que nos manda la API para que solo jalemos lo que ocupemos
 
-export function limpiarJson(json) {
+export function limpiarJson(json, jsonEvoluciones) {
   //para un mejor diseño se usar other.home :)
   let pokemonLimpio = {
     name: json.name,
@@ -47,6 +53,10 @@ export function limpiarJson(json) {
     peso: json.weight,
     estadisticas: json.stats,
     tipos: json.types,
+    nombrePrimeraEvo: jsonEvoluciones.chain.species.name,
+    nombreSegundaEvo: jsonEvoluciones.chain.evolves_to[0]?.species.name,
+    nombreTerceraEvo:
+      jsonEvoluciones.chain.evolves_to[0]?.evolves_to[0]?.species.name,
   };
   return pokemonLimpio;
 }

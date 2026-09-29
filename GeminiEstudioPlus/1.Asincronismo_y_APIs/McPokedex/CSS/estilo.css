@@ -88,7 +88,7 @@ img {
   text-transform: capitalize; /* Pone la primera letra en mayúscula automáticamente */
 }
 .btn-cambioshiny {
-  background-color: #c507ff; /* Rojo Pokédex */
+  background-color: #309ab5; /* Rojo Pokédex */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -300,4 +300,38 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Contenedor de la lista de evoluciones */
+.contenedor-evoluciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Por si son nombres muy largos, se acomodan abajo */
+  gap: 15px;
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Diseño de cada botón de evolución */
+.btn-evolucion {
+  list-style: none;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 8px 18px;
+  border-radius: 25px; /* Forma de píldora redondeada */
+  font-weight: bold;
+  text-transform: capitalize; /* Convierte 'ivysaur' en 'Ivysaur' */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease; /* Suaviza la animación */
+}
+
+/* Efecto cuando el mouse pasa por encima */
+.btn-evolucion:hover {
+  background-color: #309ab5; /* Azul clásico de Pokémon */
+  color: white;
+  transform: translateY(-3px); /* Se levanta un poquito */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
