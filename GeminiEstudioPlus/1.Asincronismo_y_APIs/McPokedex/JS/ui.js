@@ -1,13 +1,16 @@
 import { crearMemoria } from "./storage.js";
 import { buscarPokemon } from "./api.js";
 
+let grito = new Audio();
+grito.volume = 0.3;
+
 // EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 export function insertarDatosDom(datosPokemon) {
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
 
-  let grito = new Audio(datosPokemon.grito);
-  grito.volume = 0.3;
+  grito.pause();
+  grito.src = datosPokemon.grito;
   grito.play();
 
   let nombrePokemon = document.createElement("h2");
@@ -79,6 +82,7 @@ export function insertarDatosDom(datosPokemon) {
 
   botonGuardado.onclick = () => {
     let guardarPokemon = crearMemoria(datosPokemon);
+    console.log(datosPokemon);
     alertaPokemonDuplicado(guardarPokemon);
   };
 }

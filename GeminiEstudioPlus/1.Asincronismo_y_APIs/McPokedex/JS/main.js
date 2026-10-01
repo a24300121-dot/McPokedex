@@ -12,7 +12,7 @@ function obtenerPokemon() {
       pokemonBuscar();
     }
   });
-  botonBuscar.addEventListener("click", function () {
+  botonBuscar.addEventListener("click", () => {
     pokemonBuscar();
   });
   async function pokemonBuscar() {
