@@ -6,10 +6,8 @@ export function crearMemoria(objetoPokemon) {
 
   if (pokemonListaMemoria != null) {
     listaMemoria = pokemonListaMemoria;
-    revisarRepetidos = revisarNombre(listaMemoria, objetoPokemon);
-  } else {
-    revisarRepetidos = revisarNombre(listaMemoria, objetoPokemon);
   }
+  revisarRepetidos = revisarNombre(listaMemoria, objetoPokemon);
   let memoriaEmpaquetada = JSON.stringify(listaMemoria);
   localStorage.setItem("ultimoPokemon", memoriaEmpaquetada);
 

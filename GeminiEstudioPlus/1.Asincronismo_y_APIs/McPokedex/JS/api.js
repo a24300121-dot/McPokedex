@@ -1,23 +1,32 @@
 // EXPLICACION: Esta funcion es la encargada de de buscar el pokemon en la API, tambien es la encargada de los errores que puede tener la misma
 
+let estaBuscandoPokemon = false;
+
 export async function buscarPokemon(pokemonSeleccionado) {
   try {
-    let pokemonApi = `https://pokeapi.co/api/v2/pokemon/${pokemonSeleccionado}`;
-    let respuestaPokemon = await fetch(pokemonApi);
-    if (!respuestaPokemon.ok) {
-      throw new Error(404);
+    if (!estaBuscandoPokemon) {
+      estaBuscandoPokemon = true;
+
+      let pokemonApi = `https://pokeapi.co/api/v2/pokemon/${pokemonSeleccionado}`;
+      let respuestaPokemon = await fetch(pokemonApi);
+      if (!respuestaPokemon.ok) {
+        throw new Error(404);
+      }
+      let datosPokemon = await respuestaPokemon.json();
+
+      let linkSaberEvoluciones = await fetch(datosPokemon.species.url);
+      let respuestaLink = await linkSaberEvoluciones.json();
+
+      let datosEvolucion = await fetch(respuestaLink.evolution_chain.url);
+      let respuestaDatosEvolucion = await datosEvolucion.json();
+
+      datosPokemon = limpiarJson(datosPokemon, respuestaDatosEvolucion);
+
+      estaBuscandoPokemon = false;
+      return datosPokemon;
+    } else {
+      return null;
     }
-    let datosPokemon = await respuestaPokemon.json();
-
-    let linkSaberEvoluciones = await fetch(datosPokemon.species.url);
-    let respuestaLink = await linkSaberEvoluciones.json();
-
-    let datosEvolucion = await fetch(respuestaLink.evolution_chain.url);
-    let respuestaDatosEvolucion = await datosEvolucion.json();
-
-    datosPokemon = limpiarJson(datosPokemon, respuestaDatosEvolucion);
-
-    return datosPokemon;
   } catch (error) {
     let contenedor = document.getElementById("tarjeta-pokemon");
     let mensajeError = document.createElement("p");
@@ -37,6 +46,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
       contenedor.appendChild(pokemonNoEncontrado);
       contenedor.appendChild(mensajeError);
     }
+    estaBuscandoPokemon = false;
     return null;
   }
 }

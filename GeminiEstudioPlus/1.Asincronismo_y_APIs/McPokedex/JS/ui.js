@@ -6,6 +6,7 @@ grito.volume = 0.3;
 
 // EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 export function insertarDatosDom(datosPokemon) {
+  if (!datosPokemon) return null;
   let contenedorPokemon = document.getElementById("tarjeta-pokemon");
   contenedorPokemon.innerHTML = "";
 
