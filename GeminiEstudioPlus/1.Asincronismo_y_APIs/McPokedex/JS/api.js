@@ -28,6 +28,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
       return null;
     }
   } catch (error) {
+    console.error(error);
     let contenedor = document.getElementById("tarjeta-pokemon");
     let mensajeError = document.createElement("p");
     let pokemonNoEncontrado = document.createElement("img");
@@ -36,6 +37,7 @@ export async function buscarPokemon(pokemonSeleccionado) {
       pokemonNoEncontrado.src = "https://i.redd.it/q37r8riip3271.jpg";
       contenedor.innerHTML = "";
       mensajeError.textContent = "Pokemon no encontrado :(";
+
       contenedor.appendChild(pokemonNoEncontrado);
       contenedor.appendChild(mensajeError);
     } else {
@@ -46,10 +48,19 @@ export async function buscarPokemon(pokemonSeleccionado) {
       contenedor.appendChild(pokemonNoEncontrado);
       contenedor.appendChild(mensajeError);
     }
+
     estaBuscandoPokemon = false;
     return null;
   }
 }
+
+function extraerId(urlPokemon) {
+  if (!urlPokemon) return null;
+
+  let idpokemonPedazos = urlPokemon.split("/");
+  return idpokemonPedazos[idpokemonPedazos.length - 2];
+}
+
 // EXPLICACION: En este limpiamos los datos del pokemon que nos manda la API para que solo jalemos lo que ocupemos
 
 export function limpiarJson(json, jsonEvoluciones) {
@@ -67,6 +78,11 @@ export function limpiarJson(json, jsonEvoluciones) {
     nombreSegundaEvo: jsonEvoluciones.chain.evolves_to[0]?.species.name,
     nombreTerceraEvo:
       jsonEvoluciones.chain.evolves_to[0]?.evolves_to[0]?.species.name,
+    idPrimeraEvo: extraerId(jsonEvoluciones.chain.species.url),
+    idSegundaEvo: extraerId(jsonEvoluciones.chain.evolves_to[0]?.species.url),
+    idTerceraEvo: extraerId(
+      jsonEvoluciones.chain.evolves_to[0]?.evolves_to[0]?.species.url,
+    ),
   };
   return pokemonLimpio;
 }
