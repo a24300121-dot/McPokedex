@@ -118,6 +118,22 @@ export function dibujarHistorial(historialPokemons) {
   });
   contenedor.appendChild(mensaje);
   contenedor.appendChild(listaHistorial);
+  borrarHistorial();
+}
+
+function borrarHistorial() {
+  let botonBorran = document.createElement("button");
+  let contenedor = document.getElementById("tarjeta-pokemon");
+  botonBorran.classList.add("boton-borrar");
+  botonBorran.textContent = "borrar Historial";
+
+  contenedor.appendChild(botonBorran);
+
+  botonBorran.addEventListener("click", () => {
+    contenedor.innerHTML = "Esperando a que ingrese el pokemon a Buscar";
+    localStorage.clear();
+    botonBorran.remove();
+  });
 }
 
 function insertarEvoluciones(datosPokemon) {

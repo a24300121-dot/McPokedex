@@ -19,7 +19,6 @@ function obtenerPokemon() {
     let pokemonObtenido = inputPokemon.value.toLowerCase();
     let contenedor = document.getElementById("tarjeta-pokemon");
 
-    contenedor.innerHTML = "espera a que cargue el dato";
     let respuestaAPI = await API.buscarPokemon(pokemonObtenido);
     inputPokemon.value = "";
     if (respuestaAPI) {

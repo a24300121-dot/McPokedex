@@ -335,3 +335,24 @@ body {
   transform: translateY(-3px); /* Se levanta un poquito */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* Diseño del botón de borrar historial */
+.boton-borrar {
+  width: 60%; /* Para que no ocupe todo el ancho pero se vea grande */
+  margin: auto auto 10px auto; /* El primer 'auto' empuja el botón hasta el fondo de la caja */
+  background-color: #ff4d4d; /* Rojo alerta para acciones destructivas */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.boton-borrar:hover {
+  background-color: #cc0000; /* Rojo más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* Pequeño salto */
+}
