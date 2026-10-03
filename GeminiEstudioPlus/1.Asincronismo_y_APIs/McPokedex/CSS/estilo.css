@@ -326,6 +326,9 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease; /* Suaviza la animación */
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Los centra horizontalmente */
 }
 
 /* Efecto cuando el mouse pasa por encima */
@@ -355,4 +358,23 @@ body {
 .boton-borrar:hover {
   background-color: #cc0000; /* Rojo más oscuro al pasar el mouse */
   transform: translateY(-2px); /* Pequeño salto */
+}
+
+.oculto {
+  display: none !important;
+}
+.btn-desplegable {
+  background-color: #309ab5;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.btn-desplegable :hover {
+  background-color: #39b7d6;
+  transform: translate(-2px);
 }

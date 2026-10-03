@@ -6,7 +6,6 @@ import * as UI from "./ui.js";
 function obtenerPokemon() {
   let inputPokemon = document.getElementById("input_pokemon");
   let botonBuscar = document.getElementById("btn_buscar");
-
   inputPokemon.addEventListener("keydown", (evento) => {
     if (evento.key === "Enter") {
       pokemonBuscar();
@@ -15,6 +14,7 @@ function obtenerPokemon() {
   botonBuscar.addEventListener("click", () => {
     pokemonBuscar();
   });
+
   async function pokemonBuscar() {
     let pokemonObtenido = inputPokemon.value.toLowerCase();
     let contenedor = document.getElementById("tarjeta-pokemon");

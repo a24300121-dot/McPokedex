@@ -2,7 +2,7 @@ import { crearMemoria } from "./storage.js";
 import { buscarPokemon } from "./api.js";
 
 let grito = new Audio();
-grito.volume = 0.3;
+grito.volume = 0.2;
 
 // EXPLICACION: en este insertamos los datos a la pagina mediante DOM y creamos los datos
 export function insertarDatosDom(datosPokemon) {
@@ -141,8 +141,13 @@ function insertarEvoluciones(datosPokemon) {
   let primeraEvolucionCont = document.createElement("li");
   let segundaEvolucionCont = document.createElement("li");
   let ultimaEvolucionCont = document.createElement("li");
+  let botonMostrarEvo = document.createElement("button");
   let contenedor = document.getElementById("tarjeta-pokemon");
 
+  botonMostrarEvo.textContent = "mostrar Evolucion";
+  botonMostrarEvo.classList.add("btn-desplegable");
+
+  listaEvoluciones.classList.add("oculto");
   listaEvoluciones.classList.add("contenedor-evoluciones");
   primeraEvolucionCont.classList.add("btn-evolucion");
   segundaEvolucionCont.classList.add("btn-evolucion");
@@ -154,6 +159,15 @@ function insertarEvoluciones(datosPokemon) {
 
   primeraEvolucionCont.appendChild(imagenPrimeraEvo);
   listaEvoluciones.appendChild(primeraEvolucionCont);
+
+  botonMostrarEvo.addEventListener("click", () => {
+    listaEvoluciones.classList.toggle("oculto");
+    if (listaEvoluciones.classList.contains("oculto")) {
+      botonMostrarEvo.textContent = "Mostrar Evoluciones";
+    } else {
+      botonMostrarEvo.textContent = "Ocultar Evoluciones";
+    }
+  });
 
   primeraEvolucionCont.addEventListener("click", async () => {
     let buscarPrimeraEvolucion = await buscarPokemon(
@@ -192,7 +206,7 @@ function insertarEvoluciones(datosPokemon) {
       insertarDatosDom(buscarTercerEvolucion);
     });
   }
-
+  contenedor.appendChild(botonMostrarEvo);
   contenedor.appendChild(listaEvoluciones);
 }
 
