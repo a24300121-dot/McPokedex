@@ -22,6 +22,9 @@ export function insertarDatosDom(datosPokemon) {
   let botonCambioShiny = document.createElement("button");
 
   nombrePokemon.textContent = datosPokemon.name;
+  imagenPokemon.onerror = () => {
+    imagenPokemon.src = "Imagenes/imagenPokemonFallido.svg";
+  };
   imagenPokemon.src = datosPokemon.imagen;
   botonCambioShiny.textContent = "Version shiny";
 
@@ -153,30 +156,29 @@ function insertarEvoluciones(datosPokemon) {
   segundaEvolucionCont.classList.add("btn-evolucion");
   ultimaEvolucionCont.classList.add("btn-evolucion");
 
-  let imagenPrimeraEvo = document.createElement("img");
-  imagenPrimeraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idPrimeraEvo}.png`;
-  primeraEvolucionCont.textContent = datosPokemon.nombrePrimeraEvo;
-
-  primeraEvolucionCont.appendChild(imagenPrimeraEvo);
-  listaEvoluciones.appendChild(primeraEvolucionCont);
-
-  botonMostrarEvo.addEventListener("click", () => {
-    listaEvoluciones.classList.toggle("oculto");
-    if (listaEvoluciones.classList.contains("oculto")) {
-      botonMostrarEvo.textContent = "Mostrar Evoluciones";
-    } else {
-      botonMostrarEvo.textContent = "Ocultar Evoluciones";
-    }
-  });
-
-  primeraEvolucionCont.addEventListener("click", async () => {
-    let buscarPrimeraEvolucion = await buscarPokemon(
-      datosPokemon.nombrePrimeraEvo,
-    );
-    insertarDatosDom(buscarPrimeraEvolucion);
-  });
-
   if (datosPokemon.nombreSegundaEvo) {
+    let imagenPrimeraEvo = document.createElement("img");
+    imagenPrimeraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idPrimeraEvo}.png`;
+    primeraEvolucionCont.textContent = datosPokemon.nombrePrimeraEvo;
+
+    primeraEvolucionCont.appendChild(imagenPrimeraEvo);
+    listaEvoluciones.appendChild(primeraEvolucionCont);
+
+    botonMostrarEvo.addEventListener("click", () => {
+      listaEvoluciones.classList.toggle("oculto");
+      if (listaEvoluciones.classList.contains("oculto")) {
+        botonMostrarEvo.textContent = "Mostrar Evoluciones";
+      } else {
+        botonMostrarEvo.textContent = "Ocultar Evoluciones";
+      }
+    });
+
+    primeraEvolucionCont.addEventListener("click", async () => {
+      let buscarPrimeraEvolucion = await buscarPokemon(
+        datosPokemon.nombrePrimeraEvo,
+      );
+      insertarDatosDom(buscarPrimeraEvolucion);
+    });
     let imagenSegundaEvo = document.createElement("img");
     imagenSegundaEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idSegundaEvo}.png`;
     segundaEvolucionCont.textContent = datosPokemon.nombreSegundaEvo;
@@ -190,24 +192,26 @@ function insertarEvoluciones(datosPokemon) {
       );
       insertarDatosDom(buscarSegundaEvolucion);
     });
-  }
-  if (datosPokemon.nombreTerceraEvo) {
-    let imagenTerceraEvo = document.createElement("img");
-    imagenTerceraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idTerceraEvo}.png`;
-    ultimaEvolucionCont.textContent = datosPokemon.nombreTerceraEvo;
 
-    ultimaEvolucionCont.appendChild(imagenTerceraEvo);
-    listaEvoluciones.appendChild(ultimaEvolucionCont);
+    if (datosPokemon.nombreTerceraEvo) {
+      let imagenTerceraEvo = document.createElement("img");
+      imagenTerceraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idTerceraEvo}.png`;
+      ultimaEvolucionCont.textContent = datosPokemon.nombreTerceraEvo;
 
-    ultimaEvolucionCont.addEventListener("click", async () => {
-      let buscarTercerEvolucion = await buscarPokemon(
-        datosPokemon.nombreTerceraEvo,
-      );
-      insertarDatosDom(buscarTercerEvolucion);
-    });
+      ultimaEvolucionCont.appendChild(imagenTerceraEvo);
+      listaEvoluciones.appendChild(ultimaEvolucionCont);
+
+      ultimaEvolucionCont.addEventListener("click", async () => {
+        let buscarTercerEvolucion = await buscarPokemon(
+          datosPokemon.nombreTerceraEvo,
+        );
+        insertarDatosDom(buscarTercerEvolucion);
+      });
+    }
+
+    contenedor.appendChild(botonMostrarEvo);
+    contenedor.appendChild(listaEvoluciones);
   }
-  contenedor.appendChild(botonMostrarEvo);
-  contenedor.appendChild(listaEvoluciones);
 }
 
 function alertaPokemonDuplicado(pokemonDuplicado) {

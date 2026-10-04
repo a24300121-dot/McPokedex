@@ -49,6 +49,9 @@
 .rock {
   background-color: #6d26029a;
 }
+.ice {
+  background-color: #00ddff;
+}
 #tarjeta-pokemon {
   border: 2px solid #060505;
   border-radius: 10px;

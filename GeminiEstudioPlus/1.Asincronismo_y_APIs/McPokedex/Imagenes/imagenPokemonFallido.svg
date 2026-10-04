@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Fondo base (Borde negro grueso) -->
+  <circle cx="50" cy="50" r="48" fill="#222224" />
+  
+  <!-- Mitad superior roja -->
+  <path d="M 6 50 A 44 44 0 0 1 94 50 Z" fill="#ee1515" />
+  
+  <!-- Mitad inferior blanca -->
+  <path d="M 6 50 A 44 44 0 0 0 94 50 Z" fill="#ffffff" />
+  
+  <!-- Banda central negra -->
+  <rect x="2" y="46" width="96" height="8" fill="#222224" />
+  
+  <!-- Botón central (Anillo exterior negro) -->
+  <circle cx="50" cy="50" r="16" fill="#222224" />
+  
+  <!-- Botón central (Anillo medio blanco) -->
+  <circle cx="50" cy="50" r="12" fill="#ffffff" />
+  
+  <!-- Botón central (Núcleo) -->
+  <circle cx="50" cy="50" r="6" fill="#f0f0f0" />
+  
+  <!-- Detalle de brillo en la parte roja (opcional pero le da estilo) -->
+  <path d="M 20 30 A 25 25 0 0 1 40 12" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+</svg>
