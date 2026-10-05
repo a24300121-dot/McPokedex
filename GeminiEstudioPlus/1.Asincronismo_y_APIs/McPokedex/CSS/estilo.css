@@ -68,8 +68,9 @@ img {
   width: 200px;
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3)); /* Sombrita elegante */
   background-color: #69c4cb; /* Un fondo grisecito circular */
-  border-radius: 40%;
+  border-radius: 40px;
   margin: 15px 0;
+  object-fit: contain;
 }
 
 /* Esto acomodará la lista de tipos en fila en lugar de uno abajo del otro */

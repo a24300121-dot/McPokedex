@@ -63,7 +63,9 @@ export function insertarDatosDom(datosPokemon) {
   contenedorPokemon.appendChild(nombrePokemon);
   contenedorPokemon.appendChild(botonCambioShiny);
   contenedorPokemon.appendChild(imagenPokemon);
+
   insertarEvoluciones(datosPokemon);
+
   contenedorPokemon.appendChild(alturaPesoPokemon);
   contenedorPokemon.appendChild(tiposPokemon);
   contenedorPokemon.appendChild(estadisticasPokemon);

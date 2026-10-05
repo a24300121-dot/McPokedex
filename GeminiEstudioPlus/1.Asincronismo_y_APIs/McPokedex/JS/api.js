@@ -67,8 +67,8 @@ export function limpiarJson(json, jsonEvoluciones) {
   //para un mejor diseño se usar other.home :)
   let pokemonLimpio = {
     name: json.name,
-    imagen: json.sprites.front_default,
-    imagenShiny: json.sprites.front_shiny,
+    imagen: json.sprites.other.showdown.front_default,
+    imagenShiny: json.sprites.other.showdown.front_shiny,
     grito: json.cries.latest,
     altura: json.height,
     peso: json.weight,
