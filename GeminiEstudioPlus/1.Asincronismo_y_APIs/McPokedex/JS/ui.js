@@ -21,6 +21,9 @@ export function insertarDatosDom(datosPokemon) {
   let estadisticasPokemon = document.createElement("ul");
   let botonCambioShiny = document.createElement("button");
 
+  let contendorEvoluciones = document.createElement("div");
+  contendorEvoluciones.id = "contenedor-evo";
+
   nombrePokemon.textContent = datosPokemon.name;
   imagenPokemon.onerror = () => {
     imagenPokemon.src = "Imagenes/imagenPokemonFallido.svg";
@@ -64,6 +67,7 @@ export function insertarDatosDom(datosPokemon) {
   contenedorPokemon.appendChild(botonCambioShiny);
   contenedorPokemon.appendChild(imagenPokemon);
 
+  contenedorPokemon.appendChild(contendorEvoluciones);
   insertarEvoluciones(datosPokemon);
 
   contenedorPokemon.appendChild(alturaPesoPokemon);
@@ -73,13 +77,19 @@ export function insertarDatosDom(datosPokemon) {
   imagenPokemon.classList.add("pokemon-img");
   tiposPokemon.classList.add("pokemon-tipos");
 
+  let esShiny = false;
+
   botonCambioShiny.onclick = () => {
     if (imagenPokemon.src === datosPokemon.imagen) {
       imagenPokemon.src = datosPokemon.imagenShiny;
       botonCambioShiny.textContent = "Version normal";
+      esShiny = true;
+      insertarEvoluciones(datosPokemon, esShiny);
     } else {
       imagenPokemon.src = datosPokemon.imagen;
       botonCambioShiny.textContent = "Version shiny";
+      esShiny = false;
+      insertarEvoluciones(datosPokemon, esShiny);
     }
   };
   botonCambioShiny.classList.add("btn-cambioshiny");
@@ -141,13 +151,16 @@ function borrarHistorial() {
   });
 }
 
-function insertarEvoluciones(datosPokemon) {
+function insertarEvoluciones(datosPokemon, esShiny) {
   let listaEvoluciones = document.createElement("ul");
   let primeraEvolucionCont = document.createElement("li");
   let segundaEvolucionCont = document.createElement("li");
   let ultimaEvolucionCont = document.createElement("li");
   let botonMostrarEvo = document.createElement("button");
-  let contenedor = document.getElementById("tarjeta-pokemon");
+  let contenedorEvo = document.getElementById("contenedor-evo");
+  let contendorPrincipal = document.getElementById("tarjeta-pokemon");
+
+  contenedorEvo.innerHTML = "";
 
   botonMostrarEvo.textContent = "mostrar Evolucion";
   botonMostrarEvo.classList.add("btn-desplegable");
@@ -160,7 +173,13 @@ function insertarEvoluciones(datosPokemon) {
 
   if (datosPokemon.nombreSegundaEvo) {
     let imagenPrimeraEvo = document.createElement("img");
-    imagenPrimeraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idPrimeraEvo}.png`;
+
+    if (!esShiny) {
+      imagenPrimeraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idPrimeraEvo}.png`;
+    } else {
+      imagenPrimeraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${datosPokemon.idPrimeraEvo}.png`;
+    }
+
     primeraEvolucionCont.textContent = datosPokemon.nombrePrimeraEvo;
 
     primeraEvolucionCont.appendChild(imagenPrimeraEvo);
@@ -182,7 +201,11 @@ function insertarEvoluciones(datosPokemon) {
       insertarDatosDom(buscarPrimeraEvolucion);
     });
     let imagenSegundaEvo = document.createElement("img");
-    imagenSegundaEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idSegundaEvo}.png`;
+    if (!esShiny) {
+      imagenSegundaEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idSegundaEvo}.png`;
+    } else {
+      imagenSegundaEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${datosPokemon.idSegundaEvo}.png`;
+    }
     segundaEvolucionCont.textContent = datosPokemon.nombreSegundaEvo;
 
     segundaEvolucionCont.appendChild(imagenSegundaEvo);
@@ -197,7 +220,12 @@ function insertarEvoluciones(datosPokemon) {
 
     if (datosPokemon.nombreTerceraEvo) {
       let imagenTerceraEvo = document.createElement("img");
-      imagenTerceraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idTerceraEvo}.png`;
+      if (!esShiny) {
+        imagenTerceraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${datosPokemon.idTerceraEvo}.png`;
+      } else {
+        imagenTerceraEvo.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${datosPokemon.idTerceraEvo}.png`;
+      }
+
       ultimaEvolucionCont.textContent = datosPokemon.nombreTerceraEvo;
 
       ultimaEvolucionCont.appendChild(imagenTerceraEvo);
@@ -211,8 +239,8 @@ function insertarEvoluciones(datosPokemon) {
       });
     }
 
-    contenedor.appendChild(botonMostrarEvo);
-    contenedor.appendChild(listaEvoluciones);
+    contenedorEvo.appendChild(botonMostrarEvo);
+    contenedorEvo.appendChild(listaEvoluciones);
   }
 }
 
